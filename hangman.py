@@ -13,3 +13,12 @@ def get_secret_word(wordfile="/usr/share/dict/words"):
                 continue
             good_words.append(w)
     return random.choice(good_words)
+
+def hangman_mask(secret_words, guesses):
+    result_string = []
+    for i in secret_words:
+        if i in guesses:
+            result_string.append(i)
+        else:
+            result_string.append("-")
+    return "".join(result_string)    
