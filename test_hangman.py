@@ -28,3 +28,9 @@ def test_secret_word_no_punctuation():
     for _ in range(20):
         word = hangman.get_secret_word("/tmp/wordlist.txt")
         assert word == "india"
+
+def test_mask_word_a_letter():
+    secret_word = "aligator"
+    guesses = ["g"]
+    ret = hangman.hangman_mask(secret_word, guesses)
+    assert ret == "---g----"
