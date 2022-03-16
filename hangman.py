@@ -40,4 +40,28 @@ def hangman_play(secret_words, guesses, remaining_turn, guessed):
         return remaining_turn, False, False
     if guessed not in secret_words:
         guesses.append(guessed)
-        return remaining_turn-1, False, False           
+        return remaining_turn-1, False, False
+
+def main():
+    secret_word = get_word()
+    print(secret_word)
+    remaining_turns = 8
+    guesses = []
+    while True:
+        status = hangman_create_status(secret_word, guesses, remaining_turns)
+        print(status)
+        guessed = input("Enter a letter ").strip()
+        remaining_turns, repeat, finished = hangman_play(
+            secret_word, guesses, guessed, remaining_turns)
+        if finished:
+            print(f"You found the secret word '{secret_word}'")
+            break
+        if remaining_turns == 0:
+            print(f"You failed. The secret word was {secret_word}")
+            break
+        elif repeat:
+            print(f"You already guessed '{guessed}'")
+
+
+if __name__ == "__main__":
+    main()                   
