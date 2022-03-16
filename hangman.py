@@ -28,4 +28,16 @@ def hangman_create_status(secret_words, guesses, remaining_turn):
     guessed = " ".join(guesses)
     return f"""Word:{masked_word}
     Guesses:{guessed}
-    Remaining_turns:{remaining_turn}"""       
+    Remaining_turns:{remaining_turn}"""
+
+def hangman_play(secret_words, guesses, remaining_turn, guessed):
+    if "-" not in hangman_mask(secret_words, guesses+[guessed]):
+        return remaining_turn, False, True
+    if guessed in guesses:
+        return remaining_turn, True, False
+    if guessed in secret_words:
+        guesses.append(guessed)
+        return remaining_turn, False, False
+    if guessed not in secret_words:
+        guesses.append(guessed)
+        return remaining_turn-1, False, False           
